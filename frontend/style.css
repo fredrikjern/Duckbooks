@@ -1,0 +1,87 @@
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: 1px solid red;
+  background: hsl(47, 72%, 43%);
+}
+header h1 {
+  font-size: 32px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+}
+
+.none {
+  display: none;
+}
+
+.flex {
+  display: flex;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.col {
+  flex-direction: column;
+}
+
+.message-container {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 8px;
+  justify-content: center;
+}
+.message-container h2 {
+  text-align: center;
+}
+.message-container p {
+  text-align: center;
+}
+.message-container .choices {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+.message-container .choices div {
+  display: flex;
+  align-items: center;
+}
+.message-container .choices div p {
+  font-size: 18px;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: row;
+  padding: 24px;
+}
+
+#form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  outline: 1px solid red;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  padding: 8px;
+}
+
+button {
+  border: none;
+  padding: 4px;
+  font-weight: bold;
+  background: hsl(47, 72%, 43%);
+}
+button:hover {
+  background-color: hsl(47, 72%, 33%);
+}/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,28 @@
+@import "partials/variables";
+@import "partials/header";
+@import "partials/helper";
+@import "partials/main";
+@import "partials/form-container";
+*{
+    padding: 0;
+    margin: 0;
+    outline: 1px solid red;
+
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+main {
+    padding: 8px;
+}
+
+button {
+    border: none;
+    padding: 4px;
+    font-weight: bold;
+   background: $gradient-4;
+   &:hover{
+    background-color: $gradient-3;
+
+   }
+
+}
