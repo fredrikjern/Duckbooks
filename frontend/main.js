@@ -12,7 +12,7 @@ let login = async () => {
   //checkLoginStatus();
 };
 
-const checkLoginStatus = () => {
+let checkLoginStatus = () => {
   if (sessionStorage.getItem("token")) {
     document.querySelector("#login-container").classList.add("hidden");
     //document.querySelector("#form-container").classList.remove("hidden");
@@ -29,6 +29,46 @@ let getBooks = async () => {
   }
 };
 getBooks();
+
+
+
+// ? Helper functions
+let renderRegister = () => { 
+    let formContainer = document.getElementById("form-container");
+    formContainer.innerHTML = `
+    <h2>Register</h2>
+            <label for="identifier">Username
+
+                <input type="text" id="r-identifier" />
+            </label>
+            <label for="password"> Password
+
+                <input type="password" id="r-password" />
+            </label>
+            <label for="password"> Email
+
+                <input type="email" id="email" />
+            </label>
+            <button id="login">Register</button>
+    `;
+    formContainer.classList.remove("none")
+}
+let renderLogin = () => { 
+    let formContainer = document.getElementById("form-container");
+    formContainer.innerHTML = `
+    <h2>Login</h2>
+            <label for="identifier">Username
+
+                <input type="text" id="identifier" />
+            </label>
+            <label for="password"> Password
+
+                <input type="password" id="password" />
+            </label>
+            <button id="login">Login</button>
+    `;
+    formContainer.classList.remove("none")
+}
 let renderBooks = (data) => {
     let bookList = document.getElementById("book-list");
     bookList.innerHTML=""

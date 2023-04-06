@@ -22,24 +22,16 @@
             <h2> Welcome to Duckbooks </h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nesciunt facere possimus! Iusto ab cupiditate adipisci eveniet nesciunt non, impedit illum eius consequatur labore quibusdam inventore soluta architecto dicta?</p>
             <div class="choices">
-                <div><button id="login-button">Login</button></div>
+                <div><button id="login-button" onclick="renderLogin()">Login</button></div>
                 <div> <p>Or</p></div>
-                <div><button id="register-button">Register</button></div>
+                <div><button id="register-button" onclick="renderRegister()">Register</button></div>
             </div>
         </section>
-        <section class="form-container none">
-            <h2>Login</h2>
-            <label for="identifier">Username
-
-                <input type="text" id="identifier" />
-            </label>
-            <label for="password"> Password
-
-                <input type="password" id="password" />
-            </label>
-            <button id="login">Login</button>
+        <section id="form-container" class=" none">
+            
             
         </section>
+        <section class="logged-in"></section>
         <section class="bookList ">
             <h2>Books</h2>
             <ul id="book-list"></ul>
