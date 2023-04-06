@@ -1,5 +1,5 @@
 
-console.log("hej");
+console.log("hejdå");
 
 let login = async () => {
   let loginIdentifier = document.querySelector("#identifier");
