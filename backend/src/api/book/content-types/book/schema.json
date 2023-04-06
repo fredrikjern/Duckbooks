@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "books",
+  "info": {
+    "singularName": "book",
+    "pluralName": "books",
+    "displayName": "Book"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Author": {
+      "type": "string"
+    },
+    "Pages": {
+      "type": "integer"
+    },
+    "releaseDate": {
+      "type": "date"
+    },
+    "Cover": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "Grade": {
+      "type": "json"
+    }
+  }
+}
