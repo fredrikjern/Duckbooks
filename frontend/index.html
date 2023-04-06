@@ -6,11 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duckbooks</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.5/axios.min.js"
+        integrity="sha512-nnNHpffPSgINrsR8ZAIgFUIMexORL5tPwsfktOTxVYSv+AUAILuFYWES8IHl+hhIhpFGlKvWFiz9ZEusrPcSBQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="main.js"></script>
+
 </head>
 <body>
-    <header><h1>Duckbooks</h1></header>
-    <main></main>
+    <header>
+        <h1>Duckbooks</h1>
+
+    </header>
+    <main>
+        <section class="message-container">
+            <h2> Welcome to Duckbooks </h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nesciunt facere possimus! Iusto ab cupiditate adipisci eveniet nesciunt non, impedit illum eius consequatur labore quibusdam inventore soluta architecto dicta?</p>
+            <div class="choices">
+                <div><button id="login-button">Login</button></div>
+                <div> <p>Or</p></div>
+                <div><button id="register-button">Register</button></div>
+            </div>
+        </section>
+        <section class="form-container none">
+            <h2>Login</h2>
+            <label for="identifier">Username
+
+                <input type="text" id="identifier" />
+            </label>
+            <label for="password"> Password
+
+                <input type="password" id="password" />
+            </label>
+            <button id="login">Login</button>
+            
+        </section>
+        <section class="bookList ">
+            <h2>Books</h2>
+            <ul id="book-list"></ul>
+
+        </section>
+    </main>
     <footer></footer>
 </body>
 </html>
