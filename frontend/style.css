@@ -74,8 +74,22 @@ header nav ul a:hover {
   padding: 24px;
 }
 
+section.bookList {
+  border: 1px solid black;
+}
+section.bookList .book-card {
+  border: 1px solid black;
+}
+section.bookList .book-card > div:first-child {
+  outline: 1px solid red;
+  aspect-ratio: 1/1;
+}
 section.bookList li {
   display: flex;
+}
+section.bookList svg {
+  height: 20px;
+  transform: rotateY(180deg);
 }
 
 #form-container {
@@ -86,7 +100,6 @@ section.bookList li {
 * {
   padding: 0;
   margin: 0;
-  outline: 1px solid red;
   font-size: 16px;
   font-family: Arial, Helvetica, sans-serif;
 }

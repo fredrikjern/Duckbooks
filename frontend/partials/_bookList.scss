@@ -1,6 +1,19 @@
 
 section.bookList{
+    border: 1px solid black;
+    .book-card{
+        border:1px solid black;
+        >div:first-child{
+            outline: 1px solid red;
+            aspect-ratio: 1/1;
+        }
+    }
     li{
         display: flex;
     }
+    svg{
+        height: 20px;
+        transform: rotateY(180deg);
+    }
+
 }
