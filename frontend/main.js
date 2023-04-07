@@ -1,13 +1,22 @@
-
 // Async  APIfunctions
 let getBooks = async () => {
   try {
-    let response = await axios.get("http://localhost:1337/api/books");
-    renderBooks(response.data.data);
+    let response = await axios.get("http://localhost:1337/api/books?populate=*");
+      renderBooks(await response.data.data);
   } catch (error) {
     console.log(error);
   }
 };
+let setColorTheme = async () => { 
+      try {
+        let response = await axios.get("http://localhost:1337/api/theme");
+          if (!response.data.data.attributes.Lightmode) {
+              document.querySelector("header").style.background = "green";
+          }
+      } catch (error) {
+        console.log(error);
+      }
+}
 //* Authentication functions
 let register = async () => {
   let username = document.getElementById("register-username");
@@ -29,25 +38,24 @@ let login = async () => {
   try {
     let loginIdentifier = document.querySelector("#identifier");
     let loginPassword = document.querySelector("#password");
-    console.log(loginIdentifier.value);
-    console.log(loginPassword.value);
     let response = await axios.post("http://localhost:1337/api/auth/local", {
       identifier: loginIdentifier.value,
       password: loginPassword.value,
     });
     sessionStorage.setItem("token", response.data.jwt);
     checkLoginStatus(loginIdentifier.value);
+    loginIdentifier.value = "";
+    loginPassword.value = "";
   } catch (error) {
     console.log(error);
     console.log("error vid inlogg");
   }
-  //checkLoginStatus();
 };
 let checkLoginStatus = (username) => {
   if (sessionStorage.getItem("token")) {
-      renderNavbar(username);
-      renderPostLogin(username)
-    //renderNavbar()
+    renderNavbar(username);
+    renderPostLogin(username);
+    document.getElementById("form-container").classList.add("none");
   }
 };
 let logout = () => {
@@ -72,21 +80,19 @@ let renderNavbar = (username) => {
     `;
 };
 let renderPostLogin = (username) => {
-let messageContainer = document.querySelector(".message-container");
-
-    messageContainer.innerHTML = ` 
+  let messageContainer = document.querySelector(".message-container");
+  messageContainer.innerHTML = ` 
              <h2> Welcome to back ${username}! </h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nesciunt facere possimus! Iusto ab cupiditate adipisci eveniet nesciunt non, impedit illum eius consequatur labore quibusdam inventore soluta architecto dicta?</p>
-      <div>
-        Check your reading list under my Profile or browse books!
-      </div>
-      
+            <div>
+                Check your reading list under my Profile or browse books!
+            </div>
             `;
 };
 let renderLandinpage = () => {
-let messageContainer = document.querySelector(".message-container");
-
-  messageContainer.innerHTML = `            <h2> Welcome to Duckbooks </h2>
+  let messageContainer = document.querySelector(".message-container");
+  messageContainer.innerHTML = `            
+            <h2> Welcome to Duckbooks </h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nesciunt facere possimus! Iusto ab cupiditate adipisci eveniet nesciunt non, impedit illum eius consequatur labore quibusdam inventore soluta architecto dicta?</p>
             <div class="choices">
                 <div><button id="render-login-button" onclick="renderLogin()">Login</button></div>
@@ -127,7 +133,7 @@ let renderLogin = () => {
   formContainer.classList.remove("none");
   let notClicked = true;
   let loginButton = document.getElementById("login-button");
-  console.log(loginButton);
+
   loginButton.addEventListener("click", (event) => {
     event.preventDefault();
     if (notClicked) {
@@ -139,10 +145,20 @@ let renderLogin = () => {
 };
 let renderBooks = (data) => {
   let bookList = document.getElementById("book-list");
-  bookList.innerHTML = "";
-  data.forEach((book) => {
-    console.log(book.attributes.Title);
-    let b = createElement("li", book.attributes.Title);
+    bookList.innerHTML = "";
+    data.forEach((book) => {
+
+        let { Title, Author, Pages, releaseDate, cover } = book.attributes;
+        console.log(cover.data.attributes.url);
+        let text = `
+        <div><img src="http://localhost:1337${cover.data.attributes.url}" height="100" /></div>
+        <div>
+        <h3> ${Title} </h3>
+        <h4> ${Author} </h4>
+        <p> This book was released in ${releaseDate} and contains ${Pages} pages</p>
+        </div>
+    `;
+    let b = createElement("li", text,"book-card");
     bookList.append(b);
   });
 };
@@ -156,3 +172,4 @@ let createElement = (type, text, classname) => {
 };
 
 getBooks();
+setColorTheme()
