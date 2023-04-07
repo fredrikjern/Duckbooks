@@ -1,14 +1,29 @@
 header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   outline: 1px solid red;
   background: hsl(47, 72%, 43%);
+  padding-right: 24px;
 }
 header h1 {
   font-size: 32px;
   color: rgb(0, 0, 0);
   text-align: center;
+}
+header nav ul {
+  border: 1px solid green;
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  text-align: right;
+}
+header nav ul a {
+  color: hsl(220, 0%, 4%);
+}
+header nav ul a:hover {
+  background: red;
 }
 
 .none {

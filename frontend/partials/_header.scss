@@ -1,10 +1,11 @@
 header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     outline: 1px solid red;
     background: $gradient-4;
     ;
+    padding-right: 24px;
     
     h1 {
         font-size: 32px;
@@ -13,5 +14,23 @@ header {
 
         text-align: center;
     }
+nav{
+
+    ul{
+        border: 1px solid green;
+        list-style: none;
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end;
+        text-align: right;
+        a{
+            color: $dark-gray;
+            &:hover{
+                background: red
+            }
+        }
+
+    }
+};
     
 }

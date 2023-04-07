@@ -1,9 +1,17 @@
-console.log("hejdå");
 
-// Async functions
+// Async  APIfunctions
+let getBooks = async () => {
+  try {
+    let response = await axios.get("http://localhost:1337/api/books");
+    renderBooks(response.data.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+//* Authentication functions
 let register = async () => {
-    let username = document.getElementById("register-username");
-    console.log(username);
+  let username = document.getElementById("register-username");
+  console.log(username);
   let email = document.querySelector("#email");
   let registerPassword = document.querySelector("#register-password");
   console.log("noo");
@@ -28,29 +36,64 @@ let login = async () => {
       password: loginPassword.value,
     });
     sessionStorage.setItem("token", response.data.jwt);
-    console.log(response.data);
+    checkLoginStatus(loginIdentifier.value);
   } catch (error) {
+    console.log(error);
     console.log("error vid inlogg");
   }
   //checkLoginStatus();
 };
-let checkLoginStatus = () => {
+let checkLoginStatus = (username) => {
   if (sessionStorage.getItem("token")) {
-    document.querySelector("#login-container").classList.add("hidden");
-    //document.querySelector("#form-container").classList.remove("hidden");
-    document.querySelector("#product-list").classList.remove("hidden");
+      renderNavbar(username);
+      renderPostLogin(username)
+    //renderNavbar()
   }
 };
-let getBooks = async () => {
-  try {
-    let response = await axios.get("http://localhost:1337/api/books");
-    renderBooks(response.data.data);
-  } catch (error) {
-    console.log(error);
-  }
+let logout = () => {
+  sessionStorage.setItem("token", "");
+  let navbar = document.querySelector("#navbar");
+  navbar.innerHTML = "";
+  renderLandinpage();
 };
 
 //! Render functions
+let renderNavbar = (username) => {
+  let navbar = document.querySelector("#navbar");
+  navbar.innerHTML = `
+              <ul>
+                <li>
+                    <a href="#">My Profile</a>
+                </li>
+                <li>
+                    <button onclick="logout()">Log out</button> <span class="display-username"> ${username} </span>
+                </li>
+            </ul>
+    `;
+};
+let renderPostLogin = (username) => {
+let messageContainer = document.querySelector(".message-container");
+
+    messageContainer.innerHTML = ` 
+             <h2> Welcome to back ${username}! </h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nesciunt facere possimus! Iusto ab cupiditate adipisci eveniet nesciunt non, impedit illum eius consequatur labore quibusdam inventore soluta architecto dicta?</p>
+      <div>
+        Check your reading list under my Profile or browse books!
+      </div>
+      
+            `;
+};
+let renderLandinpage = () => {
+let messageContainer = document.querySelector(".message-container");
+
+  messageContainer.innerHTML = `            <h2> Welcome to Duckbooks </h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nesciunt facere possimus! Iusto ab cupiditate adipisci eveniet nesciunt non, impedit illum eius consequatur labore quibusdam inventore soluta architecto dicta?</p>
+            <div class="choices">
+                <div><button id="render-login-button" onclick="renderLogin()">Login</button></div>
+                <div> <p>Or</p></div>
+                <div><button id="register-button" onclick="renderRegister()">Register</button></div>
+            </div>`;
+};
 let renderRegister = () => {
   let formContainer = document.getElementById("form-container");
   formContainer.innerHTML = `
