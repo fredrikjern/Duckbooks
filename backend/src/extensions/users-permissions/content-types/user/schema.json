@@ -71,6 +71,12 @@
       "relation": "oneToMany",
       "target": "api::book.book",
       "mappedBy": "user"
+    },
+    "to_read_list": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::to-read.to-read",
+      "mappedBy": "users_permissions_user"
     }
   }
 }

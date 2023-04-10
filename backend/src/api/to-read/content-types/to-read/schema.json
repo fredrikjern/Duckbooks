@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "to_reads",
+  "info": {
+    "singularName": "to-read",
+    "pluralName": "to-reads",
+    "displayName": "to_read",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "bookID": {
+      "type": "integer",
+      "unique": false
+    },
+    "userID": {
+      "type": "integer",
+      "private": true
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "to_read_list"
+    }
+  }
+}
