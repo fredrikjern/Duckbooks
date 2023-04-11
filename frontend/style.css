@@ -97,6 +97,15 @@ section.bookList svg {
   flex-direction: column;
 }
 
+section.upper-section {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+section.upper-section .login-container {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
 * {
   padding: 0;
   margin: 0;
