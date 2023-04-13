@@ -4,23 +4,28 @@
   "info": {
     "singularName": "rating",
     "pluralName": "ratings",
-    "displayName": "Rating"
+    "displayName": "Rating",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "bookID": {
-      "type": "string",
-      "required": true
-    },
-    "userID": {
-      "type": "string",
-      "required": true
-    },
     "rate": {
       "type": "integer"
+    },
+    "book": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::book.book",
+      "inversedBy": "ratings"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "ratings"
     }
   }
 }

@@ -1,29 +1,87 @@
+import { userData } from "./auth.js";
 import { API_BASE } from "./constant.js";
 export async function get(endpoint) {
-    try {
-      let response = await axios.get(
-        `${API_BASE}${endpoint}`,
-          {
-              headers: {
-                  Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-              }
-          }
-      );
-        let data = await response.data;
-        return data;
- 
-    } catch (error) {
-      console.log(error);
-    }
+  try {
+    let response = await axios.get(`${API_BASE}${endpoint}`, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+    });
+    let data = await response.data;
+    //console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+export async function deleteToRead(endpoint) {
+  try {
+    let response = await axios.delete(`${API_BASE}${endpoint}`, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+    });
+    console.log("delete");
+    console.log(response);
+    //userData=get()
+  } catch (error) {
+    console.log(error);
+  }
+}
+export async function addToRead(bookId) {
+  try {
+    let response = await axios.post(
+      `${API_BASE}/to-reads`,
+      {
+        data: {
+          book: [bookId],
+          user: [sessionStorage.getItem("loginId")],
+        },
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      }
+    );
+
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+}
+export async function addRating(bookId, rating) {
+  try {
+    let response = await axios.post(
+      `${API_BASE}/ratings`,
+      {
+        data: {
+          rating: 5,
+          book: [bookId],
+          user: [sessionStorage.getItem("loginId")],
+        },
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      }
+    );
+
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
 }
 export async function getBooks() {
   try {
     let response = await axios.get(
       "http://localhost:1337/api/books?populate=*"
     );
-      generateBookList(response.data.data);
+    generateBookList(response.data.data);
     return generateBookList(response.data.data);
-  //renderBooks(await response.data.data);
+
+    //renderBooks(await response.data.data);
   } catch (error) {
     console.log(error);
   }

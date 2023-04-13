@@ -69,14 +69,14 @@
     "to_reads": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::book.book",
+      "target": "api::to-read.to-read",
       "mappedBy": "user"
     },
-    "to_read_list": {
+    "ratings": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::to-read.to-read",
-      "mappedBy": "users_permissions_user"
+      "target": "api::rating.rating",
+      "mappedBy": "user"
     }
   }
 }

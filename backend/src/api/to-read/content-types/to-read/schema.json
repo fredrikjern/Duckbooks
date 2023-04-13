@@ -12,19 +12,17 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "bookID": {
-      "type": "integer",
-      "unique": false
+    "book": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::book.book",
+      "inversedBy": "to_read"
     },
-    "userID": {
-      "type": "integer",
-      "private": true
-    },
-    "users_permissions_user": {
+    "user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
-      "inversedBy": "to_read_list"
+      "inversedBy": "to_reads"
     }
   }
 }

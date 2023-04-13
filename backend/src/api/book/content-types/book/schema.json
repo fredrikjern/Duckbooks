@@ -32,11 +32,20 @@
         "images"
       ]
     },
-    "user": {
+    "a": {
+      "type": "string"
+    },
+    "to_read": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "to_reads"
+      "relation": "oneToOne",
+      "target": "api::to-read.to-read",
+      "mappedBy": "book"
+    },
+    "ratings": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::rating.rating",
+      "mappedBy": "book"
     }
   }
 }
