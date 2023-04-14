@@ -3,6 +3,10 @@ import { get, renderGrade, addToRead } from "./api.js";
 import { render, renderNavbar } from "./render.js";
 export var loginUsername = null;
 export var userData = null;
+export async function updateData() {
+  userData = await get("/users/me?populate=deep,3");
+  console.log("updated data");
+}
 export async function login() {
   try {
     // let loginIdentifier = document.querySelector("#identifier").value;
@@ -39,7 +43,7 @@ export async function renderloggedInPage() {
   renderLoggedInBookList();
 }
 
-async function renderLoggedInBookList() {
+export async function renderLoggedInBookList() {
   // ? console.log("logged in book loist");
   let lowerSection = document.querySelector(".lower-section");
   lowerSection.innerHTML = "";
@@ -65,7 +69,9 @@ async function renderLoggedInBookList() {
     li.append(button);
     button.addEventListener("click", (event) => {
       event.preventDefault();
-      addToRead(`${book.id}`);
+      addToRead(`${book.id}`)
+      updateData();
+      // Måste ladda om My prfile för att se ändringar
     });
   });
 }

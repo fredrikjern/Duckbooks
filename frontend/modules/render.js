@@ -66,6 +66,7 @@ function appendReadList() {
       event.preventDefault();
       let endpoint = `/to-reads/${book.id}`;
       deleteToRead(endpoint);
+      removeButton.parentNode.parentNode.remove();
     });
     //eventlistener
   });

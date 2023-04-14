@@ -1,5 +1,6 @@
 import { userData } from "./auth.js";
 import { API_BASE } from "./constant.js";
+import { updateData } from "./auth.js";
 export async function get(endpoint) {
   try {
     let response = await axios.get(`${API_BASE}${endpoint}`, {
@@ -22,7 +23,8 @@ export async function deleteToRead(endpoint) {
       },
     });
     console.log("delete");
-    console.log(response);
+      console.log(response);
+      await updateData()
     //userData=get()
   } catch (error) {
     console.log(error);
@@ -44,6 +46,7 @@ export async function addToRead(bookId) {
         },
       }
     );
+    await updateData()
 
     console.log(response);
   } catch (error) {
