@@ -30,7 +30,7 @@ export async function renderNavbar() {
     if (loginUsername === null) console.log("lika med null");
   }
 }
-async function renderMyProfile() {
+export async function renderMyProfile() {
   console.log(userData.to_reads, "to-reads");
   let html = `
   <div>
@@ -70,11 +70,6 @@ function appendReadList() {
     });
     //eventlistener
   });
-}
-async function getReadList() {
-  console.log("get read-list");
-  let resp = await get("/users/me?populate=deep,3");
-  console.log(resp.data);
 }
 function navbarListeners() {
   let logoutButton = document.getElementById("logout-button");

@@ -1,10 +1,12 @@
 
-section.bookList{
-    border: 1px solid black;
+section{
+    border-bottom: 1px solid black;
     .book-card{
-        border:1px solid black;
+        padding: 8px;
+        gap: 4px;
+        border-bottom:1px solid black;
         >div:first-child{
-            outline: 1px solid red;
+            //outline: 1px solid red;
             aspect-ratio: 1/1;
         }
     }
@@ -14,6 +16,9 @@ section.bookList{
     svg{
         height: 20px;
         transform: rotateY(180deg);
+        &:hover{
+            transform: scale(1.2) rotateY(180deg);
+        }
     }
 
 }

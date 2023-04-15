@@ -1,6 +1,6 @@
 import { API_BASE } from "./constant.js";
-import { get, renderGrade, addToRead } from "./api.js";
-import { render, renderNavbar } from "./render.js";
+import { get, fiveDucksGrading, addToRead, calculateAverageGrade, addRating } from "./api.js";
+import { render, renderMyProfile, renderNavbar } from "./render.js";
 export var loginUsername = null;
 export var userData = null;
 export async function updateData() {
@@ -44,14 +44,12 @@ export async function renderloggedInPage() {
 }
 
 export async function renderLoggedInBookList() {
-  // ? console.log("logged in book loist");
   let lowerSection = document.querySelector(".lower-section");
   lowerSection.innerHTML = "";
-  let avgGrade = 3.5;
   let response = await axios.get("http://localhost:1337/api/books?populate=*");
-  //console.log(response.data.data);
-  response.data.data.forEach((book) => {
-    let grade = renderGrade(avgGrade);
+  response.data.data.forEach((book, index) => {
+    let avgGrade = calculateAverageGrade(book.attributes.ratings.data)
+    let grade = fiveDucksGrading(avgGrade, index);
     let { Title, Author, Pages, releaseDate, cover } = book.attributes;
     let li = document.createElement("li");
     li.innerHTML = `
@@ -64,16 +62,44 @@ export async function renderLoggedInBookList() {
                   </div>
                   `;
     lowerSection.append(li);
-    let button = document.createElement("button");
-    button.innerHTML = "Add";
-    li.append(button);
-    button.addEventListener("click", (event) => {
-      event.preventDefault();
-      addToRead(`${book.id}`)
-      updateData();
-      // Måste ladda om My prfile för att se ändringar
-    });
+    let ratingDucks = document.querySelectorAll(`.duck${index}`);
+    if (isNotRated(book)) {
+      ratingDucks.forEach((ratingDuck,index) => {
+  
+        ratingDuck.addEventListener('click', (event) => {
+          event.preventDefault();
+          addRating(book.id,index)
+        
+        });
+       })
+   
+    }
+    if (isNotOnReadList(book)) {
+      let button = document.createElement("button");
+      button.innerHTML = "Add";
+      li.append(button);
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        addToRead(`${book.id}`);
+        renderPage()
+      });
+    }
   });
+}
+function isNotRated(book) {
+    let ratedBooks = [];
+    userData.ratings.forEach((to_read) => ratedBooks.push(to_read.book.id));
+    return ratedBooks.includes(book.id) ? false : true;
+}
+export async function renderPage() {
+  await updateData();
+  renderMyProfile();
+  renderLoggedInBookList();
+}
+export function isNotOnReadList(book) {
+  let toReadIds = [];
+  userData.to_reads.forEach((to_read) => toReadIds.push(to_read.book.id));
+  return toReadIds.includes(book.id) ? false : true;
 }
 function generateLoggedInPage() {
   let html = `

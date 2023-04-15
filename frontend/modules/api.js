@@ -1,6 +1,6 @@
-import { userData } from "./auth.js";
 import { API_BASE } from "./constant.js";
-import { updateData } from "./auth.js";
+import { updateData,renderPage } from "./auth.js";
+//import {  } from "./";
 export async function get(endpoint) {
   try {
     let response = await axios.get(`${API_BASE}${endpoint}`, {
@@ -23,8 +23,8 @@ export async function deleteToRead(endpoint) {
       },
     });
     console.log("delete");
-      console.log(response);
-      await updateData()
+    console.log(response);
+    await updateData();
     //userData=get()
   } catch (error) {
     console.log(error);
@@ -46,7 +46,7 @@ export async function addToRead(bookId) {
         },
       }
     );
-    await updateData()
+    await updateData();
 
     console.log(response);
   } catch (error) {
@@ -55,11 +55,12 @@ export async function addToRead(bookId) {
 }
 export async function addRating(bookId, rating) {
   try {
+    console.log(bookId,rating);
     let response = await axios.post(
       `${API_BASE}/ratings`,
       {
         data: {
-          rating: 5,
+          rate: rating,
           book: [bookId],
           user: [sessionStorage.getItem("loginId")],
         },
@@ -69,7 +70,8 @@ export async function addRating(bookId, rating) {
           Authorization: `Bearer ${sessionStorage.getItem("token")}`,
         },
       }
-    );
+      );
+      renderPage();
 
     console.log(response);
   } catch (error) {
@@ -79,12 +81,10 @@ export async function addRating(bookId, rating) {
 export async function getBooks() {
   try {
     let response = await axios.get(
-      "http://localhost:1337/api/books?populate=*"
+      "http://localhost:1337/api/books?populate=deep,4"
     );
-    generateBookList(response.data.data);
+    //generateBookList(response.data.data);
     return generateBookList(response.data.data);
-
-    //renderBooks(await response.data.data);
   } catch (error) {
     console.log(error);
   }
@@ -92,8 +92,8 @@ export async function getBooks() {
 function generateBookList(data) {
   let listHtml = [];
   data.forEach((book) => {
-    let avgGrade = 3.5;
-    let grade = renderGrade(avgGrade);
+    let avgGrade = calculateAverageGrade(book.attributes.ratings.data);
+    let grade = fiveDucksGrading(avgGrade);
     let { Title, Author, Pages, releaseDate, cover } = book.attributes;
     let text = `
             <li class=book-card>
@@ -110,7 +110,15 @@ function generateBookList(data) {
   });
   return listHtml.join("");
 }
-export function renderGrade(averageGrade) {
+export function calculateAverageGrade(data) {
+  let sum = 0;
+  data.forEach((datum) => {
+    sum += datum.attributes.rate;
+  });
+  let avgGrade = sum / data.length
+  return avgGrade?avgGrade:0
+}
+export function fiveDucksGrading(averageGrade,ind) {
   let ducks = [];
   for (let index = 1; index < 6; index++) {
     let duckFill = "hsl(55, 71%, 57%)";
@@ -124,7 +132,7 @@ export function renderGrade(averageGrade) {
       }
     }
     let duck = `
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+        <svg class="duck${ind}"version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
         viewBox="0 0 512.001 512.001" xml:space="preserve">
         <g>
         <g>
@@ -169,6 +177,7 @@ export function renderGrade(averageGrade) {
 `;
     ducks.push(duck);
   }
+  return ducks;
 }
 
 export async function setColorTheme() {
