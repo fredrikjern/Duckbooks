@@ -32,9 +32,6 @@
         "images"
       ]
     },
-    "a": {
-      "type": "string"
-    },
     "to_read": {
       "type": "relation",
       "relation": "oneToOne",
@@ -46,9 +43,6 @@
       "relation": "oneToMany",
       "target": "api::rating.rating",
       "mappedBy": "book"
-    },
-    "Grade": {
-      "type": "json"
     }
   }
 }

@@ -89,7 +89,7 @@ export async function getBooks() {
     console.log(error);
   }
 }
-function generateBookList(data) {
+export function generateBookList(data) {
   let listHtml = [];
   data.forEach((book) => {
     let avgGrade = calculateAverageGrade(book.attributes.ratings.data);
@@ -177,7 +177,7 @@ export function fiveDucksGrading(averageGrade,ind) {
 `;
     ducks.push(duck);
   }
-  return ducks;
+  return ducks.join('');
 }
 
 export async function setColorTheme() {

@@ -28,7 +28,6 @@ header h1 {
   text-align: center;
 }
 header nav ul {
-  border: 1px solid green;
   list-style: none;
   display: flex;
   gap: 8px;

@@ -1,12 +1,16 @@
 import { landingMessage, loginMessage } from "./old/messages.js";
-import { loginUsername, userData } from "./auth.js";
-import { login, register } from "./auth.js";
+import { compareAuthor,compareRate,compareTitle } from "./compare.js";
+import { loginUsername, logout, userData } from "./auth.js";
+import { login, register, generateLoggedInPage } from "./auth.js";
 import { fadeInElement, fadeOutElement } from "./fadeinout.js";
 import { timeout } from "./constant.js";
 import { get, deleteToRead } from "./api.js";
+import { renderMyProfile } from "./renderMyProfile.js";
 
 export function render(message, section, timeout, listenerFunction) {
-  fadeOutElement(section); // Fade out the element
+  if(section=="upper") section = document.querySelector(".upper-section")
+  if(section=="lower") section = document.querySelector(".lower-section")
+    fadeOutElement(section); // Fade out the element
   setTimeout(function () {
     section.innerHTML = message;
     fadeInElement(section);
@@ -14,10 +18,15 @@ export function render(message, section, timeout, listenerFunction) {
   }, timeout); //
 }
 export async function renderNavbar() {
-  if (loginUsername !== null) {
-    let navbar = document.querySelector("nav");
+  let navbar = document.querySelector("nav");
+  if (sessionStorage.getItem("token").length > 20) {
+    console.log("if token");
+    console.log(sessionStorage.getItem("token").length);
     let navbarUl = `
             <ul>
+                <li>
+                    <button id="home-button">Home</button>
+                </li>
                 <li>
                     <button id="my-profile-button">My Profile</button>
                 </li>
@@ -27,55 +36,22 @@ export async function renderNavbar() {
             </ul>
                 `;
     render(navbarUl, navbar, timeout, navbarListeners);
-    if (loginUsername === null) console.log("lika med null");
+  } else {
+    navbar.innerHTML = "";
   }
 }
-export async function renderMyProfile() {
-  console.log(userData.to_reads, "to-reads");
-  let html = `
-  <div>
-  <h2>${loginUsername}'s Profile  </h2>
-  </div>
-  <div>
-    <h3>To read list</h3>
-    <ul id="to-read-list-list"> </ul> 
-  </div>
-  <div>
-    <h3>${loginUsername} have rated these books</h3>
-    <ul id="rated-list></ul>
-  </div>
-  `;
-  let upperSection = document.querySelector(".upper-section");
-  render(html, upperSection, timeout, appendReadList);
-}
-function appendReadList() {
-  let toReadList = document.getElementById("to-read-list-list");
-  userData.to_reads.forEach((book) => {
-    let li = document.createElement("li");
-    let div = document.createElement("div");
-    div.innerHTML = `
-      Title: ${book.book.Title}
-        `;
-    let buttonDiv = document.createElement("div");
-    let removeButton = document.createElement("button");
-    removeButton.innerHTML = "Remove";
-    buttonDiv.append(removeButton);
-    li.append(div, buttonDiv);
-    toReadList.append(li);
-    removeButton.addEventListener("click", (event) => {
-      event.preventDefault();
-      let endpoint = `/to-reads/${book.id}`;
-      deleteToRead(endpoint);
-      removeButton.parentNode.parentNode.remove();
-    });
-    //eventlistener
-  });
-}
 function navbarListeners() {
+  let homeButton = document.getElementById("home-button");
+  homeButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    render(generateLoggedInPage(), "upper", 500);
+    //renderLoggedInBookList();
+  });
   let logoutButton = document.getElementById("logout-button");
   logoutButton.addEventListener("click", (event) => {
     event.preventDefault();
     console.log("logout");
+    logout();
   });
   let myProfile = document.querySelector("#my-profile-button");
   myProfile.addEventListener("click", (event) => {
@@ -83,6 +59,8 @@ function navbarListeners() {
     renderMyProfile();
   });
 }
+
+
 
 export function landingListeners() {
   let loginButton = document.getElementById("show-login-button");
