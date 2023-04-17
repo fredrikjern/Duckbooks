@@ -1,7 +1,18 @@
+import { render, landingListeners } from "./modules/render.js";
 import { landingMessage, loginMessage } from "./modules/old/messages.js";
-import { render } from "./modules/render.js";
-import { onload } from "./modules/onload.js";
-
+//import { login, register, renderloggedInPage } from "./auth.js";
+import { getBooks } from "./modules/api.js";
+import { timeout } from "./modules/constant.js";
+import { renderNavbar } from "./modules/navbar.js";
+import { updateCurrentPage, getCurrentPage } from "./modules/stateHandling.js";
+export async function onload() {
+  sessionStorage.setItem("token", "");
+  render(landingMessage, ".upper-section", timeout, landingListeners);
+  render(await getBooks(), ".lower-section", timeout);
+  renderNavbar();
+  updateCurrentPage("landing-page");
+  console.log(getCurrentPage());
+}
 onload();
 
-//login()
+// Access the current page state from any component

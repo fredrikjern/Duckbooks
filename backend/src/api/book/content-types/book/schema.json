@@ -43,6 +43,9 @@
       "relation": "oneToMany",
       "target": "api::rating.rating",
       "mappedBy": "book"
+    },
+    "s": {
+      "type": "string"
     }
   }
 }

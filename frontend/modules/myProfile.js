@@ -2,6 +2,7 @@ import { render } from "./render.js";
 import { deleteToRead,addRating,addToRead } from "./api.js";
 import { userData } from "./auth.js";
 import { timeout } from "./constant.js";
+import { renderLoggedInBookList } from "./loggedIn.js";
 import { compareAuthor,compareRate,compareTitle } from "./compare.js";
 export async function renderMyProfile() {
   let html = `
@@ -27,7 +28,7 @@ export async function renderMyProfile() {
   </div>
   `;
 
-  render(html, "upper", timeout, appendReadList);
+  render(html, ".upper-section", timeout, appendReadList);
 }
 
 function appendRatedList(sortBy) {
@@ -59,6 +60,7 @@ function appendRatedList(sortBy) {
       event.preventDefault();
       let endpoint = `/ratings/${book.id}`;
       deleteToRead(endpoint);
+      renderLoggedInBookList();
       removeButton.parentNode.parentNode.remove();
     });
   });
