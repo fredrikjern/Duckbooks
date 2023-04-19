@@ -1,11 +1,10 @@
 header {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    outline: 1px solid red;
     background: $gradient-4;
     ;
-    padding-right: 24px;
 
     h1 {
         font-size: 32px;
@@ -16,6 +15,12 @@ header {
     }
 
     nav {
+        background: $gradient-2;
+        outline: 1px solid red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
 
         ul {
             //border: 1px solid green;

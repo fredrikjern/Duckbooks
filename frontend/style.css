@@ -16,16 +16,23 @@
 
 header {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  outline: 1px solid red;
   background: hsl(47, 72%, 43%);
-  padding-right: 24px;
 }
 header h1 {
   font-size: 32px;
   color: rgb(0, 0, 0);
   text-align: center;
+}
+header nav {
+  background: hsl(47, 72%, 30%);
+  outline: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 header nav ul {
   list-style: none;
@@ -85,6 +92,7 @@ section .book-card > div:first-child {
   aspect-ratio: 1/1;
 }
 section li {
+  transition: 300ms;
   display: flex;
 }
 section svg {
@@ -101,12 +109,43 @@ section svg:hover {
 }
 
 section.upper-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+  width: 100%;
+}
+section.upper-section .login-container {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
 }
-section.upper-section .login-container {
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
+section.upper-section .login-container div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section.upper-section #to-read-list li {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+section.upper-section #rated-list li {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#rated-list li > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 }
 
 * {

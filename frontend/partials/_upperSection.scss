@@ -1,10 +1,42 @@
 section.upper-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
-   
+    width: 100%;
 
     .login-container {
+        display: flex;
+        gap: 24px;
+        justify-content: space-between;
         opacity: 1;
         transition: opacity 0.5s ease-in-out;
+        div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
+    #to-read-list{
+        
+        li{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+
+        }
+    }
+    #rated-list{
+        
+        li{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+
+        }
+    }
+
 }

@@ -1,23 +1,22 @@
 import { addToRead, addRating } from "./api.js";
+import { getCurrentPage,updateCurrentPage } from "./stateHandling.js";
 import { userData } from "./auth.js";
 import { updateData } from "./auth.js";
 import { renderNavbar } from "./navbar.js";
 import { render } from "./render.js"
 import { timeout } from "./constant.js";
 import { renderMyProfile } from "./myProfile.js";
-
-//import { renderPage } from "./myProfile.js";
-
 import { calculateAverageGrade, fiveDucksGrading } from "./rating.js";
 export async function renderloggedInPage() {
   await updateData()
-  renderNavbar();
   render(generateLoggedInPage(), ".upper-section", timeout);
-  renderLoggedInBookList();
+  renderNavbar();
+  //renderLoggedInBookList();
 }
 export async function renderLoggedInBookList() {
-  let lowerSection = document.querySelector(".lower-section");
-  lowerSection.innerHTML = "";
+  updateCurrentPage("logged-in-all-books")
+  let upperSection = document.querySelector(".upper-section");
+  upperSection.innerHTML = "";
   let response = await axios.get("http://localhost:1337/api/books?populate=*");
   response.data.data.forEach((book, index) => {
     let avgGrade = calculateAverageGrade(book.attributes.ratings.data);
@@ -33,13 +32,18 @@ export async function renderLoggedInBookList() {
                   <p>Rating: ${grade}</p>
                   </div>
                   `;
-    lowerSection.append(li);
+    li.style.opacity="0"
+    upperSection.append(li);
+    setTimeout(() => {
+      li.style.opacity = "1";
+    }, 200);
+
     let ratingDucks = document.querySelectorAll(`.duck${index}`);
     if (isNotRated(book)) {
       ratingDucks.forEach((ratingDuck, index) => {
         ratingDuck.addEventListener("click", (event) => {
           event.preventDefault();
-          addRating(book.id, index);
+          addRating(book.id, index+1);
         });
       });
     }
@@ -50,7 +54,7 @@ export async function renderLoggedInBookList() {
       button.addEventListener("click", (event) => {
         event.preventDefault();
         addToRead(`${book.id}`);
-        renderPage();
+        button.remove()
       });
     }
   });

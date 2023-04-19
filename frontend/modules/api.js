@@ -50,8 +50,6 @@ export async function addToRead(bookId) {
       }
     );
     await updateData();
-    renderMyProfile()
-    console.log(response);
   } catch (error) {
     console.log(error);
   }

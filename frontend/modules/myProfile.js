@@ -1,30 +1,38 @@
 import { render } from "./render.js";
-import { deleteToRead,addRating,addToRead } from "./api.js";
+import { updateCurrentPage, getCurrentPage } from "./stateHandling.js";
+import { deleteToRead, addRating, addToRead } from "./api.js";
 import { userData } from "./auth.js";
 import { timeout } from "./constant.js";
 import { renderLoggedInBookList } from "./loggedIn.js";
-import { compareAuthor,compareRate,compareTitle } from "./compare.js";
+import { compareAuthor, compareRate, compareTitle } from "./compare.js";
 export async function renderMyProfile() {
+  updateCurrentPage("my-profile");
+
   let html = `
   <div>
   <h2>${userData.username}'s Profile  </h2>
   </div>
+
   <div>
-    <h3>To read list</h3>
-    <ul id="to-read-list-list"> </ul> 
-  </div>
-  <div>
-    <details style="margin:9px">
-        <summary style="display: flex; align-items: center;">
-             <h3>You have rated these books &#x25BE;</h3>
-        </summary>
-               Sort by: <select id="list-sort">
-            <option value="Rating">Rating</option>
-            <option value="Title">Title</option>
-            <option value="Author">Author</option>
-        </select>
-       <ul id="rated-list"></ul>
-    </details>  
+    <div>
+      <h3>To read list</h3>
+      <ul id="to-read-list"> </ul> 
+    </div>
+    <div>
+      <details class"rated-list">
+          <summary style="display: flex; align-items: center;">
+              <h3>You have rated these books &#x25BE;</h3>
+          </summary>
+                Sort by: <select id="list-sort">
+              <option value="Rating">Rating</option>
+              <option value="Title">Title</option>
+              <option value="Author">Author</option>
+          </select>
+        <ul id="rated-list"></ul>
+      </details>  
+    </div>
+  
+  
   </div>
   `;
 
@@ -49,7 +57,11 @@ function appendRatedList(sortBy) {
     let li = document.createElement("li");
     let div = document.createElement("div");
     div.innerHTML = `
-      <b>Title:</b> ${book.book.Title} <b>Author:</b> ${book.book.Author} <b>Rating:</b> ${book.rate}/5 ducks
+    <div>
+      <div><h4> ${book.book.Title} <h5></div>
+      <div> <em>${book.book.Author}</em></div>
+    </div>
+    <div>${book.rate}/5</div>  
         `;
     let removeButton = document.createElement("button");
     removeButton.innerHTML = "Remove";
@@ -60,18 +72,20 @@ function appendRatedList(sortBy) {
       event.preventDefault();
       let endpoint = `/ratings/${book.id}`;
       deleteToRead(endpoint);
-      renderLoggedInBookList();
       removeButton.parentNode.parentNode.remove();
     });
   });
 }
 function appendReadList() {
-  let toReadList = document.getElementById("to-read-list-list");
+  let toReadList = document.getElementById("to-read-list");
   userData.to_reads.forEach((book) => {
     let li = document.createElement("li");
     let div = document.createElement("div");
     div.innerHTML = `
-      Title: ${book.book.Title}
+    <div>
+    <div><b>${book.book.Title}</b></div>
+    <div><em>${book.book.Author}</em></div>
+    </div>
         `;
     let buttonDiv = document.createElement("div");
     let removeButton = document.createElement("button");
@@ -91,8 +105,6 @@ function appendReadList() {
   let select = document.getElementById("list-sort");
   select.addEventListener("change", (event) => {
     event.preventDefault();
-    console.log("cha");
     appendRatedList(document.getElementById("list-sort").value);
   });
-  console.log(select.value);
 }

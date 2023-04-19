@@ -7,10 +7,10 @@ import { renderNavbar } from "./modules/navbar.js";
 import { updateCurrentPage, getCurrentPage } from "./modules/stateHandling.js";
 export async function onload() {
   sessionStorage.setItem("token", "");
-  render(landingMessage, ".upper-section", timeout, landingListeners);
-  render(await getBooks(), ".lower-section", timeout);
-  renderNavbar();
   updateCurrentPage("landing-page");
+  render(landingMessage, ".upper-section", timeout, landingListeners);
+  //render(await getBooks(), ".lower-section", timeout);
+  renderNavbar();
   console.log(getCurrentPage());
 }
 onload();
