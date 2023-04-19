@@ -2,7 +2,7 @@ import { API_BASE } from "./constant.js";
 import { calculateAverageGrade, fiveDucksGrading } from "./rating.js";
 import { renderLoggedInBookList } from "./loggedIn.js";
 import { updateData } from "./auth.js";
-//import {  } from "./";
+
 export async function get(endpoint) {
   try {
     let response = await axios.get(`${API_BASE}${endpoint}`, {
@@ -24,8 +24,6 @@ export async function deleteToRead(endpoint) {
         Authorization: `Bearer ${sessionStorage.getItem("token")}`,
       },
     });
-    console.log("delete");
-    console.log(response);
     await updateData();
   } catch (error) {
     console.log(error);
