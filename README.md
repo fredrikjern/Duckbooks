@@ -25,11 +25,3 @@ Användare ska kunna spara böcker i en personlig Att läsa-lista. Denna lista s
 
 Sidan ska ha ett (någorlunda) professionellt utseende.
 Sidan ska fungera utan några större buggar.
-
-Todo:
-Du har fått i uppdrag att ta fram en applikation för bokaffären Book Ducks, där de kan ladda upp böcker som de säljer. Användare ska också kunna logga in, betygsätta samt spara böcker.
-
-
-Doing:
-
-Done:
