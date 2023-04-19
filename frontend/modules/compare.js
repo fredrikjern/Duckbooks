@@ -4,9 +4,7 @@ export function compareRate(a, b){
 };
 export function compareTitle(a, b){
   const firstLetterA = a.book.Title.charAt(0).toLowerCase();
-  console.log(a);
   const firstLetterB = b.book.Title.charAt(0).toLowerCase();
-  console.log(b);
   if (firstLetterA < firstLetterB) {
     return -1;
   }

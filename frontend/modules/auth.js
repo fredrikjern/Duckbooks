@@ -8,7 +8,8 @@ export async function updateData() {
   userData = await get("/users/me?populate=deep,3");
 }
 
-let devmode = true;
+let devmode = false;
+console.log("Dev mode: "+devmode);
 
 export async function login() {
   try {

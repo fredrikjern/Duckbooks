@@ -20,7 +20,6 @@ export async function renderloggedInPage() {
 `;
   render(html, ".upper-section", timeout, seeProfilelistener);
   renderNavbar();
-  console.log(getCurrentPage());
 }
 function seeProfilelistener() {
   let seeButton = document.getElementById("see-profile-button");

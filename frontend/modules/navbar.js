@@ -7,8 +7,6 @@ import { onload } from "../main.js";
 import { updateCurrentPage, getCurrentPage } from "./stateHandling.js";
 
 export async function renderNavbar() {
-    console.log("nav");
-    console.log(getCurrentPage());
   if (sessionStorage.getItem("token").length > 20) {
     let navbarUl = `
             <ul>
@@ -88,7 +86,6 @@ function navbarListeners() {
   logoutButton.addEventListener("click", (event) => {
       event.preventDefault();
       updateCurrentPage('logout')
-    console.log("logout");
     logout();
   });
 }

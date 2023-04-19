@@ -2,8 +2,9 @@ import { render } from "./modules/render.js";
 import { login, register } from "./modules/auth.js";
 import { timeout } from "./modules/constant.js";
 import { renderNavbar } from "./modules/navbar.js";
-import { updateCurrentPage, getCurrentPage } from "./modules/stateHandling.js";
+import { updateCurrentPage } from "./modules/stateHandling.js";
 import { setColorTheme } from "./modules/api.js";
+
 export async function onload() {
   sessionStorage.setItem("token", "");
   updateCurrentPage("landing-page");
@@ -19,18 +20,16 @@ export async function onload() {
             </div>
           </div>
 `;
-  
+
   render(message, ".upper-section", timeout, landingListeners);
   renderNavbar();
-  console.log(getCurrentPage());
 }
 function landingListeners() {
   let loginButton = document.getElementById("show-login-button");
   loginButton.addEventListener("click", (event) => {
     event.preventDefault();
-    updateCurrentPage("login-form")
-    console.log(getCurrentPage());
-    renderNavbar()
+    updateCurrentPage("login-form");
+    renderNavbar();
     let loginMessage = `
     <h2>Login</h2>
     <div class="login">
@@ -60,12 +59,11 @@ function landingListeners() {
     `;
     render(registerMessage, ".login-container", timeout, registerListener);
   });
-  
 }
 
 let loginListener = () => {
-    let loginContainer = document.querySelector(".login-container");
-    loginContainer.classList.add("llogin")
+  let loginContainer = document.querySelector(".login-container");
+  loginContainer.classList.add("llogin");
   let loginButton = document.querySelector("#login-button");
   loginButton.addEventListener("click", (event) => {
     event.preventDefault();
@@ -74,8 +72,8 @@ let loginListener = () => {
 };
 
 let registerListener = () => {
-    let loginContainer = document.querySelector(".login-container");
-    loginContainer.classList.add("login")
+  let loginContainer = document.querySelector(".login-container");
+  loginContainer.classList.add("login");
   let registerButton = document.querySelector("#register-button");
   registerButton.addEventListener("click", (event) => {
     event.preventDefault();
@@ -86,4 +84,4 @@ async function initial() {
   await setColorTheme();
   onload();
 }
-initial()
+initial();

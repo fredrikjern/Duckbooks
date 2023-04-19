@@ -7,7 +7,6 @@ import { compareAuthor, compareRate, compareTitle } from "./compare.js";
 export async function renderMyProfile() {
   updateCurrentPage("my-profile");
   await updateData();
-  console.log(getCurrentPage());
 
   let html = `
   <div class="content-container">
