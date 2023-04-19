@@ -1,5 +1,19 @@
+footer {
+  font-size: 10px;
+  position: sticky;
+  bottom: 0%;
+  right: 0%;
+  padding: 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .none {
   display: none !important;
+}
+
+.hidden {
+  display: hidden;
 }
 
 .flex {
@@ -19,7 +33,7 @@ header {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background: hsl(47, 72%, 43%);
+  background: var(--background-color);
 }
 header h1 {
   font-size: 32px;
@@ -27,8 +41,6 @@ header h1 {
   text-align: center;
 }
 header nav {
-  background: hsl(47, 72%, 30%);
-  outline: 1px solid red;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,81 +53,73 @@ header nav ul {
   justify-content: flex-end;
   text-align: right;
 }
-header nav ul a {
-  color: hsl(220, 0%, 4%);
+header nav ul li {
+  border-bottom: 2px solid var(--accent-color);
 }
-header nav ul a:hover {
-  background: red;
+header nav button {
+  background: none;
+}
+header nav button:hover {
+  background: var(--accent-color-light);
 }
 
-.message-container {
+.content-container {
   display: flex;
   flex-direction: column;
   padding: 24px;
   gap: 8px;
   justify-content: center;
+  max-width: 800px;
 }
-.message-container h2 {
+.content-container h2 {
   text-align: center;
 }
-.message-container p {
+.content-container p {
   text-align: center;
 }
-.message-container .choices {
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: row;
-}
-.message-container .choices div {
-  display: flex;
-  align-items: center;
-}
-.message-container .choices div p {
-  font-size: 18px;
-}
 
-.login-container {
-  display: flex;
-  flex-direction: row;
-  padding: 24px;
-}
-
-section {
+.book-list {
   border-bottom: 1px solid black;
 }
-section .book-card {
+.book-list ul {
+  display: flex;
+  flex-direction: column;
+}
+.book-list .book-card {
   padding: 8px;
   gap: 4px;
   border-bottom: 1px solid black;
 }
-section .book-card > div:first-child {
+.book-list .book-card > div:first-child {
   aspect-ratio: 1/1;
 }
-section li {
+.book-list li {
   transition: 300ms;
   display: flex;
 }
-section svg {
-  height: 20px;
+.book-list svg {
+  height: 1.4rem;
   transform: rotateY(180deg);
 }
-section svg:hover {
+.book-list svg:hover {
   transform: scale(1.2) rotateY(180deg);
-}
-
-#form-container {
-  display: flex;
-  flex-direction: column;
 }
 
 section.upper-section {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
   gap: 8px;
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
+  width: 100%;
+  min-height: 300px;
+}
+section.upper-section .content-container {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0, auto;
+}
+section.upper-section .content-container > div {
   width: 100%;
 }
 section.upper-section .login-container {
@@ -124,6 +128,9 @@ section.upper-section .login-container {
   justify-content: space-between;
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
+}
+section.upper-section .login-container.login {
+  flex-direction: column;
 }
 section.upper-section .login-container div {
   display: flex;
@@ -140,31 +147,64 @@ section.upper-section #rated-list li {
   display: flex;
   justify-content: space-between;
 }
+section.upper-section details {
+  width: 100%;
+}
+section.upper-section details summary {
+  width: 100%;
+  display: flex;
+}
+section.upper-section details summary h3 {
+  width: 100%;
+}
+
+.list-container {
+  outline: 1px solid red;
+  width: 100%;
+}
 
 #rated-list li > div {
+  color: red;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
 }
 
+@media only screen and (min-width: 1000px) {
+  .list-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+  }
+  header {
+    padding: 16px;
+    gap: 16px;
+  }
+}
+:root {
+  --background-color: #ffffff;
+  --text-color: #0b0b0b;
+  --accent-color: #f6c769;
+  --accent-color-light: #f6c769;
+}
+
 * {
   padding: 0;
   margin: 0;
-  font-size: 16px;
+  font-size: clamp(14px, 1.2vw, 24px);
+  color: var(--text-color);
   font-family: Arial, Helvetica, sans-serif;
-}
-
-main {
-  padding: 8px;
 }
 
 button {
   border: none;
   padding: 4px;
   font-weight: bold;
-  background: hsl(47, 72%, 43%);
+  background: var(--accent-color);
 }
 button:hover {
-  background-color: hsl(47, 72%, 33%);
+  background: var(--accent-color-light);
 }/*# sourceMappingURL=style.css.map */

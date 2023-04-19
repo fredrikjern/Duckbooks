@@ -9,12 +9,19 @@ export async function updateData() {
   userData = await get("/users/me?populate=deep,3");
   console.log("updated data");
 }
+let devmode = true;
+
 export async function login() {
   try {
-    // let loginIdentifier = document.querySelector("#identifier").value;
-    // let loginPassword = document.querySelector("#password").value;
-    let loginIdentifier = "Ernst";
-    let loginPassword = "Abcd1234";
+    let loginIdentifier;
+    let loginPassword;
+    if (devmode) {
+      loginIdentifier = "Ernst";
+      loginPassword = "Abcd1234";
+    } else {
+      loginIdentifier = document.querySelector("#identifier").value;
+      loginPassword = document.querySelector("#password").value;
+    }
     let response = await axios.post(`${API_BASE}/auth/local`, {
       identifier: loginIdentifier,
       password: loginPassword,
@@ -23,11 +30,8 @@ export async function login() {
     sessionStorage.setItem("token", response.data.jwt);
     sessionStorage.setItem("loginId", response.data.user.id);
     if (sessionStorage.getItem("token")) renderloggedInPage();
-    // loginIdentifier.value = "";
-    // loginPassword.value = "";
-
-    // let a = await get("/to-reads/");
-    // console.log(a);
+    loginIdentifier = "";
+    loginPassword = "";
   } catch (error) {
     console.log(error);
     console.log("error vid inlogg");
@@ -35,13 +39,8 @@ export async function login() {
 }
 export async function register() {
   let username = document.getElementById("register-username");
-  console.log(username);
   let email = document.querySelector("#email");
   let registerPassword = document.querySelector("#register-password");
-  console.log("noo");
-  console.log(username.value);
-  console.log(email.value);
-  console.log(registerPassword.value);
   await axios.post("http://localhost:1337/api/auth/local/register", {
     username: username.value,
     email: email.value,

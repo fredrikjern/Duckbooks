@@ -1,12 +1,24 @@
 section.upper-section {
     display: flex;
-    flex-direction: column;
+    //flex-direction: column;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
+
     gap: 8px;
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
     width: 100%;
+    min-height: 300px;
+
+    .content-container {
+        display: flex;
+        justify-content: flex-start;
+        margin: 0, auto;
+        >div{
+            width: 100%;
+        }
+        
+    }
 
     .login-container {
         display: flex;
@@ -14,28 +26,46 @@ section.upper-section {
         justify-content: space-between;
         opacity: 1;
         transition: opacity 0.5s ease-in-out;
-        div{
+
+        &.login {
+            flex-direction: column;
+        }
+
+        div {
             display: flex;
             justify-content: center;
             align-items: center;
         }
     }
-    #to-read-list{
-        
-        li{
+
+    #to-read-list {
+
+        li {
             width: 100%;
             display: flex;
             justify-content: space-between;
 
         }
     }
-    #rated-list{
-        
-        li{
+
+    #rated-list {
+
+        li {
             width: 100%;
             display: flex;
             justify-content: space-between;
 
+        }
+    }
+
+    details {
+        width: 100%;
+        summary {
+            width: 100%;
+            display: flex;
+            h3{
+                width: 100%;
+            }
         }
     }
 

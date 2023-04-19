@@ -1,30 +1,32 @@
-@import "partials/variables";
+@import "partials/footer";
 @import "partials/helper";
 @import "partials/header";
 @import "partials/main";
-@import "partials/bookList";
-@import "partials/form-container";
-@import "partials/upperSection";
+@import "partials/book-list";
+@import "partials/section";
 @import "partials/rated-list";
+@import "partials/media";
+:root {
+    --background-color: #ffffff;
+    --text-color: #0b0b0b;
+    --accent-color: #f6c769;
+    --accent-color-light: #f6c769;
+}
 *{
     padding: 0;
     margin: 0;
     //outline: 1px solid red;
-
-    font-size: 16px;
+    font-size: clamp(14px, 1.2vw, 24px);
+    color: var(--text-color);
     font-family: Arial, Helvetica, sans-serif;
 }
-main {
-    padding: 8px;
-}
-
 button {
     border: none;
     padding: 4px;
     font-weight: bold;
-   background: $gradient-4;
+   background: var(--accent-color);
    &:hover{
-    background-color: $gradient-3;
+    background: var(--accent-color-light)
 
    }
 

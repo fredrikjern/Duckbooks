@@ -1,0 +1,13 @@
+@media only screen and (min-width: 1000px) {
+    .list-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 16px;
+        width: 100%;
+    }
+    header{
+        padding:16px;
+        gap: 16px;
+    }
+}

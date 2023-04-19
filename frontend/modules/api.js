@@ -87,7 +87,7 @@ export async function getBooks() {
   }
 }
 export function generateBookList(data) {
-  let listHtml = [];
+  let listHtml = ['<div class="book-list"><ul>'];
   data.forEach((book) => {
     let avgGrade = calculateAverageGrade(book.attributes.ratings.data);
     let grade = fiveDucksGrading(avgGrade);
@@ -105,9 +105,10 @@ export function generateBookList(data) {
                 `;
     listHtml.push(text);
   });
+
+  listHtml.push("</ul></div>");
   return listHtml.join("");
 }
-
 export async function setColorTheme() {
   try {
     let response = await axios.get("http://localhost:1337/api/theme");

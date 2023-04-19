@@ -1,6 +1,10 @@
 
-section{
+.book-list {
     border-bottom: 1px solid black;
+    ul{
+        display: flex;
+        flex-direction: column;
+    }
     .book-card{
         padding: 8px;
         gap: 4px;
@@ -15,7 +19,7 @@ section{
         display: flex;
     }
     svg{
-        height: 20px;
+        height: 1.4rem;
         transform: rotateY(180deg);
         &:hover{
             transform: scale(1.2) rotateY(180deg);

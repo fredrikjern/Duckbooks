@@ -14,9 +14,9 @@
   "attributes": {
     "book": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToOne",
       "target": "api::book.book",
-      "inversedBy": "to_read"
+      "inversedBy": "to_reads"
     },
     "user": {
       "type": "relation",

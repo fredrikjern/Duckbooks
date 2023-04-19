@@ -32,12 +32,6 @@
         "images"
       ]
     },
-    "to_read": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::to-read.to-read",
-      "mappedBy": "book"
-    },
     "ratings": {
       "type": "relation",
       "relation": "oneToMany",
@@ -46,6 +40,12 @@
     },
     "s": {
       "type": "string"
+    },
+    "to_reads": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::to-read.to-read",
+      "mappedBy": "book"
     }
   }
 }

@@ -1,8 +1,7 @@
 import { userData, logout } from "./auth.js";
 import { render } from "./render.js";
 import { renderMyProfile } from "./myProfile.js";
-import { generateLoggedInPage } from "./loggedIn.js";
-import { renderLoggedInBookList } from "./loggedIn.js";
+import { renderLoggedInBookList, renderloggedInPage } from "./loggedIn.js";
 import { renderAllBooks } from "./allBooks.js";
 import { onload } from "../main.js";
 import { updateCurrentPage, getCurrentPage } from "./stateHandling.js";
@@ -74,9 +73,7 @@ function navbarListeners() {
     let homeButton = document.getElementById("home-button");
     homeButton.addEventListener("click", (event) => {
       event.preventDefault();
-        render(generateLoggedInPage(), ".upper-section", 500);
-        updateCurrentPage('logged-in-home')
-        renderNavbar()
+       renderloggedInPage()
     });
   }
   if (getCurrentPage() !== "my-profile") {

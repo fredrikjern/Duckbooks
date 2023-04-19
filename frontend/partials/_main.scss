@@ -1,9 +1,10 @@
-.message-container {
+.content-container {
     display: flex;
     flex-direction: column;
     padding: 24px;
     gap: 8px;
     justify-content:  center;
+    max-width: 800px;
     h2{
         text-align: center;
     }
@@ -11,28 +12,5 @@
         text-align: center;
     }
 
-    .choices {
-        display: flex;
-        justify-content: space-evenly;
-        flex-direction: row;
-
-
-        div {
-            display: flex;
-            align-items: center;
-            p{
-                font-size: 18px;
-            }
-
-        }
-    }
-
 }
 
-.login-container {
-    display: flex;
-    flex-direction: row;
-    padding: 24px;
-
-
-}

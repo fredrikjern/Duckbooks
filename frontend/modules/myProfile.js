@@ -1,26 +1,30 @@
 import { render } from "./render.js";
 import { updateCurrentPage, getCurrentPage } from "./stateHandling.js";
 import { deleteToRead, addRating, addToRead } from "./api.js";
-import { userData } from "./auth.js";
+import { updateData, userData } from "./auth.js";
 import { timeout } from "./constant.js";
-import { renderLoggedInBookList } from "./loggedIn.js";
 import { compareAuthor, compareRate, compareTitle } from "./compare.js";
 export async function renderMyProfile() {
+  await updateData();
   updateCurrentPage("my-profile");
 
   let html = `
+  <div class="content-container">
   <div>
   <h2>${userData.username}'s Profile  </h2>
   </div>
-
-  <div>
+  <div class="list-container">
     <div>
-      <h3>To read list</h3>
+    <details class="to-read-list">
+      <summary>
+        <h3>To read list</h3>
+      </summary>
       <ul id="to-read-list"> </ul> 
+    </details>
     </div>
     <div>
-      <details class"rated-list">
-          <summary style="display: flex; align-items: center;">
+      <details>
+          <summary>
               <h3>You have rated these books &#x25BE;</h3>
           </summary>
                 Sort by: <select id="list-sort">
@@ -31,8 +35,7 @@ export async function renderMyProfile() {
         <ul id="rated-list"></ul>
       </details>  
     </div>
-  
-  
+  </div>
   </div>
   `;
 

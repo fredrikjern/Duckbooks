@@ -1,6 +1,12 @@
+.list-container{
+outline: 1px solid red;
+width: 100%;
+}
+
 #rated-list {
     li {
         >div{
+            color: red;
             display: flex;
             flex-direction: row;
             justify-content: space-between;

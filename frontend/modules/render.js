@@ -1,6 +1,4 @@
-import { landingMessage, loginMessage } from "./old/messages.js";
-import { compareAuthor, compareRate, compareTitle } from "./compare.js";
-import {  logout, userData } from "./auth.js";
+
 import { login, register } from "./auth.js";
 import { fadeInElement, fadeOutElement } from "./fadeinout.js";
 import { timeout } from "./constant.js";
@@ -18,19 +16,3 @@ export function render(message, selector, timeout, listenerFunction) {
 }
 
 
-export function landingListeners() {
-  let loginButton = document.getElementById("show-login-button");
-  loginButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    let loginContainer = document.querySelector(".login-container");
-    //render(loginMessage, loginContainer);
-    login();
-  });
-}
-let loginListener = () => {
-  let loginButton = document.querySelector("#login-button");
-  loginButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    login();
-  });
-};

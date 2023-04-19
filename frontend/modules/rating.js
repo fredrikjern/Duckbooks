@@ -65,5 +65,6 @@ export function fiveDucksGrading(averageGrade, ind) {
 `;
     ducks.push(duck);
   }
+  ducks.push(` (${averageGrade}/5) `)
   return ducks.join("");
 }

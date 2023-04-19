@@ -3,7 +3,7 @@ header {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background: $gradient-4;
+    background: var(--background-color);
     ;
 
     h1 {
@@ -15,8 +15,7 @@ header {
     }
 
     nav {
-        background: $gradient-2;
-        outline: 1px solid red;
+
         display: flex;
         justify-content: center;
         align-items: center;
@@ -29,15 +28,16 @@ header {
             gap: 8px;
             justify-content: flex-end;
             text-align: right;
-
-            a {
-                color: $dark-gray;
-
-                &:hover {
-                    background: red
-                }
+            li{
+                border-bottom: 2px solid var(--accent-color);
             }
 
+        }
+        button {
+            background: none;
+            &:hover{
+                background: var(--accent-color-light)
+            }
         }
     }
 

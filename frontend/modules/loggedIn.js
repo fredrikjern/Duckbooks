@@ -1,22 +1,45 @@
 import { addToRead, addRating } from "./api.js";
-import { getCurrentPage,updateCurrentPage } from "./stateHandling.js";
+import { getCurrentPage, updateCurrentPage } from "./stateHandling.js";
 import { userData } from "./auth.js";
 import { updateData } from "./auth.js";
 import { renderNavbar } from "./navbar.js";
-import { render } from "./render.js"
+import { render } from "./render.js";
 import { timeout } from "./constant.js";
 import { renderMyProfile } from "./myProfile.js";
 import { calculateAverageGrade, fiveDucksGrading } from "./rating.js";
 export async function renderloggedInPage() {
-  await updateData()
-  render(generateLoggedInPage(), ".upper-section", timeout);
+  updateCurrentPage("logged-in-page");
+  await updateData();
+  let html = `
+  <div class="content-container">
+    <h2> Välkommen tillbaka ${userData.username}! </h2>
+    <p>Vi är glada att ha dig tillbaka på Ankademiebokhandeln! </p>
+    <p>Kolla gärna runt och lägg till böcker i din Att läsa lista samt ge betyg åt böcker du har läst!</p>
+    <button id="see-profile-button">Se Profil!</button>
+  </div>
+`;
+  render(html, ".upper-section", timeout, seeProfilelistener);
   renderNavbar();
-  //renderLoggedInBookList();
+  console.log(getCurrentPage());
+}
+function seeProfilelistener() {
+  let seeButton = document.getElementById("see-profile-button");
+
+  seeButton.addEventListener("click", (event) => {
+    renderMyProfile();
+    seeButton.classList = "hidden";
+  });
 }
 export async function renderLoggedInBookList() {
-  updateCurrentPage("logged-in-all-books")
+  updateCurrentPage("logged-in-all-books");
   let upperSection = document.querySelector(".upper-section");
   upperSection.innerHTML = "";
+  let div = document.createElement("div");
+  div.classList.add("book-list");
+  let ul = document.createElement("ul");
+  ul.classList.add("logged-in-list");
+  div.append(ul);
+  upperSection.append(div);
   let response = await axios.get("http://localhost:1337/api/books?populate=*");
   response.data.data.forEach((book, index) => {
     let avgGrade = calculateAverageGrade(book.attributes.ratings.data);
@@ -32,8 +55,8 @@ export async function renderLoggedInBookList() {
                   <p>Rating: ${grade}</p>
                   </div>
                   `;
-    li.style.opacity="0"
-    upperSection.append(li);
+    li.style.opacity = "0";
+    ul.append(li);
     setTimeout(() => {
       li.style.opacity = "1";
     }, 200);
@@ -43,7 +66,7 @@ export async function renderLoggedInBookList() {
       ratingDucks.forEach((ratingDuck, index) => {
         ratingDuck.addEventListener("click", (event) => {
           event.preventDefault();
-          addRating(book.id, index+1);
+          addRating(book.id, index + 1);
         });
       });
     }
@@ -54,7 +77,7 @@ export async function renderLoggedInBookList() {
       button.addEventListener("click", (event) => {
         event.preventDefault();
         addToRead(`${book.id}`);
-        button.remove()
+        button.remove();
       });
     }
   });
@@ -73,15 +96,4 @@ export function isNotOnReadList(book) {
   let toReadIds = [];
   userData.to_reads.forEach((to_read) => toReadIds.push(to_read.book.id));
   return toReadIds.includes(book.id) ? false : true;
-}
-export function generateLoggedInPage() {
-  let html = `
-<h2> Welcome to back ${userData.username}! </h2>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi nesciunt facere possimus! Iusto ab cupiditate adipisci eveniet nesciunt non, impedit illum eius consequatur labore quibusdam inventore soluta architecto dicta?</p>
-    <div>
-    Check your reading list under my Profile or browse books below!
-    </div>
-  
-`;
-  return html;
 }
