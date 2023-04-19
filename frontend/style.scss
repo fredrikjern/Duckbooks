@@ -8,28 +8,31 @@
 @import "partials/media";
 @import "partials/details";
 @import "partials/not-logged-in";
+
 :root {
     --background-color: #ffffff;
     --text-color: #0b0b0b;
     --accent-color: #f6c769;
     --accent-color-light: #f6c769;
 }
-*{
+
+* {
     padding: 0;
     margin: 0;
     //outline: 1px solid red;
-    font-size: clamp(14px, 1.2vw, 24px);
+    font-size: clamp(14px, 1.2vw, 30px);
     color: var(--text-color);
     font-family: Arial, Helvetica, sans-serif;
 }
+
 button {
     border: none;
     padding: 4px;
     font-weight: bold;
-   background: var(--accent-color);
-   &:hover{
-    background: var(--accent-color-light)
+    background: var(--accent-color);
 
-   }
+    &:hover {
+        background: var(--accent-color-light)
+    }
 
 }

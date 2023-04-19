@@ -49,13 +49,19 @@ function landingListeners() {
   registerButton.addEventListener("click", (event) => {
     event.preventDefault();
     let registerMessage = `
-          <label for="register-username">Användarnamn</label>
-        <input type="text" id="register-username">
-        <label for="email">Email-adress</label>
+      <h2>Login</h2>
+    <div class="login">
+          <label for="register-username">Användarnamn
+          <input type="text" id="register-username">
+          </label>
+        <label for="email">Email-adress
         <input type="email" id="email">
-        <label for="register-password">Lösenord</label>
+        </label>
+        <label for="register-password">Lösenord
         <input type="password" id="register-password">
+        </label>
     <button id="register-button">Registrera dig!</button>
+    </div>
     `;
     render(registerMessage, ".login-container", timeout, registerListener);
   });
@@ -73,7 +79,7 @@ let loginListener = () => {
 
 let registerListener = () => {
   let loginContainer = document.querySelector(".login-container");
-  loginContainer.classList.add("login");
+  loginContainer.classList.add("llogin");
   let registerButton = document.querySelector("#register-button");
   registerButton.addEventListener("click", (event) => {
     event.preventDefault();

@@ -47,10 +47,9 @@ export async function register() {
     password: registerPassword.value,
   });
   alert("User has been created! Please login :) ");
+  onload()
 }
 export function logout() {
   sessionStorage.setItem("token", "");
-  //let navbar = document.querySelector("#navbar");
-  //navbar.innerHTML = "";
   onload();
 }

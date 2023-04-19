@@ -1,9 +1,10 @@
 section.upper-section {
+
     display: flex;
     //flex-direction: column;
     justify-content: center;
     // align-items: center;
-    gap: 8px;
+
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
     width: 100%;
@@ -12,12 +13,31 @@ section.upper-section {
 
     .content-container {
         display: flex;
+        flex-direction: column;
+        padding: 24px;
+        gap: 1.5rem;
+        max-width: 800px;
+        background: var(--background-color);
+        display: flex;
         justify-content: flex-start;
-        margin: 0, auto;
-        >div{
+        margin: 0,
+        auto;
+
+        h2 {
+            text-align: center;
+        }
+
+        p {
+
+            text-align: center;
+        }
+
+
+        >div {
             width: 100%;
-        }   
+        }
     }
+
     #to-read-list {
         li {
             width: 100%;

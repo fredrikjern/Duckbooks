@@ -27,7 +27,6 @@ export async function deleteToRead(endpoint) {
     console.log("delete");
     console.log(response);
     await updateData();
-    //userData=get()
   } catch (error) {
     console.log(error);
   }
