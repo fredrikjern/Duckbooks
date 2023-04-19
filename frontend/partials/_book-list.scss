@@ -1,29 +1,80 @@
+#rated-list {
+    li {
+        >div {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+        }
+    }
+}
 
 .book-list {
-    border-bottom: 1px solid black;
-    ul{
+    padding: 8px;
+    border-bottom: 1px solid var(--text-color);
+
+    ul {
         display: flex;
         flex-direction: column;
     }
-    .book-card{
+
+    .book-card {
         padding: 8px;
         gap: 4px;
-        border-bottom:1px solid black;
-        >div:first-child{
-            //outline: 1px solid red;
-            aspect-ratio: 1/1;
-        }
+        border-bottom: 1px solid black;
+        // >div:first-child{
+        //     //outline: 1px solid red;
+        //     aspect-ratio: 1/1;
+        // }
     }
-    li{
+
+    li {
         transition: 300ms;
         display: flex;
-    }
-    svg{
-        height: 1.4rem;
-        transform: rotateY(180deg);
-        &:hover{
-            transform: scale(1.2) rotateY(180deg);
+
+        &:hover {
+            background: rgb(223, 221, 207);
+
+        }
+
+        .add {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-right: 4px;
+            margin-left: 4px;
+
+            button {
+                &:hover {
+                    background: var(--accent-color);
+                    scale: 1.1;
+                }
+            }
+
         }
     }
+
+    svg {
+        height: 1.4rem;
+        transform: rotateY(180deg) translateY(4px);
+
+        &:hover {
+            transform: scale(1.2) rotateY(180deg);
+
+            .wing {
+                transform: rotate(2deg);
+            }
+
+            .eye {
+                transform: translateX(-7px);
+                fill:rgb(21, 69, 28);
+            }
+        }
+    }
+
+    img {
+        margin-right: 12px;
+    }
+
 
 }

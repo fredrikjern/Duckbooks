@@ -10,11 +10,11 @@ export function fiveDucksGrading(averageGrade, ind) {
   let ducks = [];
   for (let index = 1; index < 6; index++) {
     let duckFill = "hsl(55, 71%, 57%)";
+    let wingfill = "gray";
     if (index > averageGrade) {
       if (Math.abs(averageGrade - index) < 1) {
-        //console.log(Math.abs(averageGrade - index));
-        //duckFill = `linear-gradient(90deg, rgba(223,213,53,1) 16%, rgba(0,0,0,1) 45%`;
-        duckFill = "red";
+        duckFill = "rgb(238, 227, 146)";
+        wingfill = "rgb(28, 88, 16)";
       } else {
         duckFill = "#000000";
       }
@@ -49,14 +49,14 @@ export function fiveDucksGrading(averageGrade, ind) {
     </g>
     <g>
 	<g>
-    <path fill="gray" d="M425.577,324.05c-5.768-3.817-13.538-2.238-17.355,3.53c-13.842,20.912-34.649,36.216-58.586,43.091
+    <path class="wing" fill="${wingfill}" d="M425.577,324.05c-5.768-3.817-13.538-2.238-17.355,3.53c-13.842,20.912-34.649,36.216-58.586,43.091
     c-6.649,1.91-10.488,8.847-8.58,15.494c1.576,5.494,6.585,9.07,12.029,9.07c1.145,0,2.309-0.158,3.464-0.49
     c29.662-8.52,55.429-27.463,72.559-53.34C432.924,335.638,431.344,327.867,425.577,324.05z"/>
 	</g>
     </g>
     <g>
 	<g>
-    <path fill="black" d="M179.087,126.365c-6.916,0-12.524,5.607-12.524,12.524v31.434c0,6.917,5.608,12.524,12.524,12.524
+    <path class="eye" fill="black" d="M179.087,126.365c-6.916,0-12.524,5.607-12.524,12.524v31.434c0,6.917,5.608,12.524,12.524,12.524
     s12.524-5.607,12.524-12.524v-31.434C191.611,131.972,186.003,126.365,179.087,126.365z"/>
 	</g>
 </g>
@@ -65,6 +65,6 @@ export function fiveDucksGrading(averageGrade, ind) {
 `;
     ducks.push(duck);
   }
-  ducks.push(` (${averageGrade}/5) `)
+  ducks.push(` (${Math.round(averageGrade*10)/10}/5) `)
   return ducks.join("");
 }

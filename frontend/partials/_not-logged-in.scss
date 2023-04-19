@@ -1,7 +1,26 @@
-.login-container {
-    display: flex;
-    flex-direction: row;
-    padding: 24px;
+    .login-container {
+        display: flex;
+        flex-direction: row;
+        gap: 24px;
+        justify-content: center;
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
+        &.llogin{
+            flex-direction: column;
+        }
+        .login {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
 
-
-}
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }

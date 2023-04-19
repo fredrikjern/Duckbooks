@@ -1,12 +1,13 @@
 import { render } from "./render.js";
 import { updateCurrentPage, getCurrentPage } from "./stateHandling.js";
-import { deleteToRead, addRating, addToRead } from "./api.js";
+import { deleteToRead } from "./api.js";
 import { updateData, userData } from "./auth.js";
 import { timeout } from "./constant.js";
 import { compareAuthor, compareRate, compareTitle } from "./compare.js";
 export async function renderMyProfile() {
-  await updateData();
   updateCurrentPage("my-profile");
+  await updateData();
+  console.log(getCurrentPage());
 
   let html = `
   <div class="content-container">
@@ -17,7 +18,7 @@ export async function renderMyProfile() {
     <div>
     <details class="to-read-list">
       <summary>
-        <h3>To read list</h3>
+        <h3>To read list &#x25BE</h3>
       </summary>
       <ul id="to-read-list"> </ul> 
     </details>

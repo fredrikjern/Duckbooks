@@ -7,6 +7,8 @@ import { onload } from "../main.js";
 import { updateCurrentPage, getCurrentPage } from "./stateHandling.js";
 
 export async function renderNavbar() {
+    console.log("nav");
+    console.log(getCurrentPage());
   if (sessionStorage.getItem("token").length > 20) {
     let navbarUl = `
             <ul>
@@ -41,27 +43,22 @@ export async function renderNavbar() {
 }
 
 function loggedOutListeners() {
-  if (getCurrentPage() === "landing-page") {
-    console.log("tjohopp");
+  if (getCurrentPage() !== "all-books") {
     let allBooksButton = document.getElementById("all-books-button");
     allBooksButton.addEventListener("click", (event) => {
       event.preventDefault();
       renderAllBooks();
     });
-  } else if (getCurrentPage() === "all-books") {
-    console.log("hej");
+  } else if (getCurrentPage() !== "landing-page") {
     let homeButton = document.getElementById("logged-out-home-button");
     homeButton.addEventListener("click", (event) => {
       event.preventDefault();
       onload();
     });
-  } else {
-    console.log("nada");
-  }
+  } 
 }
 function navbarListeners() {
   if (getCurrentPage() !== "logged-in-all-books") {
-    console.log("hej");
     let allBooksButton = document.getElementById("all-books-button");
     allBooksButton.addEventListener("click", (event) => {
       event.preventDefault();

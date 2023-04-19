@@ -1,4 +1,5 @@
 footer {
+  background: var(--background-color);
   font-size: 10px;
   position: sticky;
   bottom: 0%;
@@ -13,7 +14,7 @@ footer {
 }
 
 .hidden {
-  display: hidden;
+  visibility: hidden !important;
 }
 
 .flex {
@@ -37,7 +38,6 @@ header {
 }
 header h1 {
   font-size: 32px;
-  color: rgb(0, 0, 0);
   text-align: center;
 }
 header nav {
@@ -70,6 +70,7 @@ header nav button:hover {
   gap: 8px;
   justify-content: center;
   max-width: 800px;
+  background: var(--background-color);
 }
 .content-container h2 {
   text-align: center;
@@ -78,8 +79,16 @@ header nav button:hover {
   text-align: center;
 }
 
+#rated-list li > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .book-list {
-  border-bottom: 1px solid black;
+  padding: 8px;
+  border-bottom: 1px solid var(--text-color);
 }
 .book-list ul {
   display: flex;
@@ -90,19 +99,40 @@ header nav button:hover {
   gap: 4px;
   border-bottom: 1px solid black;
 }
-.book-list .book-card > div:first-child {
-  aspect-ratio: 1/1;
-}
 .book-list li {
   transition: 300ms;
   display: flex;
 }
+.book-list li:hover {
+  background: rgb(223, 221, 207);
+}
+.book-list li .add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 4px;
+  margin-left: 4px;
+}
+.book-list li .add button:hover {
+  background: var(--accent-color);
+  scale: 1.1;
+}
 .book-list svg {
   height: 1.4rem;
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateY(4px);
 }
 .book-list svg:hover {
   transform: scale(1.2) rotateY(180deg);
+}
+.book-list svg:hover .wing {
+  transform: rotate(2deg);
+}
+.book-list svg:hover .eye {
+  transform: translateX(-7px);
+  fill: rgb(21, 69, 28);
+}
+.book-list img {
+  margin-right: 12px;
 }
 
 section.upper-section {
@@ -113,6 +143,7 @@ section.upper-section {
   transition: opacity 0.5s ease-in-out;
   width: 100%;
   min-height: 300px;
+  background: var(--background-color);
 }
 section.upper-section .content-container {
   display: flex;
@@ -121,21 +152,6 @@ section.upper-section .content-container {
 }
 section.upper-section .content-container > div {
   width: 100%;
-}
-section.upper-section .login-container {
-  display: flex;
-  gap: 24px;
-  justify-content: space-between;
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
-}
-section.upper-section .login-container.login {
-  flex-direction: column;
-}
-section.upper-section .login-container div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 section.upper-section #to-read-list li {
   width: 100%;
@@ -146,29 +162,6 @@ section.upper-section #rated-list li {
   width: 100%;
   display: flex;
   justify-content: space-between;
-}
-section.upper-section details {
-  width: 100%;
-}
-section.upper-section details summary {
-  width: 100%;
-  display: flex;
-}
-section.upper-section details summary h3 {
-  width: 100%;
-}
-
-.list-container {
-  outline: 1px solid red;
-  width: 100%;
-}
-
-#rated-list li > div {
-  color: red;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
 }
 
 @media only screen and (min-width: 1000px) {
@@ -184,6 +177,44 @@ section.upper-section details summary h3 {
     gap: 16px;
   }
 }
+details {
+  width: 100%;
+}
+details summary {
+  width: 100%;
+  display: flex;
+  margin-top: 26px;
+}
+details summary h3 {
+  width: 100%;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+.login-container.llogin {
+  flex-direction: column;
+}
+.login-container .login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+.login-container div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 :root {
   --background-color: #ffffff;
   --text-color: #0b0b0b;

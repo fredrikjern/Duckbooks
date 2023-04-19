@@ -15,7 +15,7 @@ export async function renderloggedInPage() {
     <h2> Välkommen tillbaka ${userData.username}! </h2>
     <p>Vi är glada att ha dig tillbaka på Ankademiebokhandeln! </p>
     <p>Kolla gärna runt och lägg till böcker i din Att läsa lista samt ge betyg åt böcker du har läst!</p>
-    <button id="see-profile-button">Se Profil!</button>
+    <p><button id="see-profile-button">Se Profil!</button></p>
   </div>
 `;
   render(html, ".upper-section", timeout, seeProfilelistener);
@@ -71,14 +71,26 @@ export async function renderLoggedInBookList() {
       });
     }
     if (isNotOnReadList(book)) {
+      let div = document.createElement("div");
+      div.classList.add("add")
       let button = document.createElement("button");
       button.innerHTML = "Add";
-      li.append(button);
+      
+      div.append(button);
+      li.append(div);
       button.addEventListener("click", (event) => {
         event.preventDefault();
         addToRead(`${book.id}`);
-        button.remove();
+        button.classList.add("hidden");
       });
+    } else {
+      let div = document.createElement("div");
+      let button = document.createElement("button");
+      button.innerHTML = "Add";
+      button.classList.add("hidden");
+      div.append(button);
+      div.classList.add("hidden", "add");
+      li.append(div);
     }
   });
 }

@@ -2,7 +2,6 @@ import { API_BASE } from "./constant.js";
 import { calculateAverageGrade, fiveDucksGrading } from "./rating.js";
 import { renderLoggedInBookList } from "./loggedIn.js";
 import { updateData } from "./auth.js";
-import { renderMyProfile } from "./myProfile.js";
 //import {  } from "./";
 export async function get(endpoint) {
   try {
@@ -113,7 +112,18 @@ export async function setColorTheme() {
   try {
     let response = await axios.get("http://localhost:1337/api/theme");
     if (!response.data.data.attributes.Lightmode) {
-      document.querySelector("header").style.background = "green";
+      console.log("Darkmode");
+
+      document.documentElement.style.setProperty(
+        "--background-color",
+        "#121212"
+      );
+      document.documentElement.style.setProperty(
+        "--text-color",
+        "hsl(43, 21%, 87%)"
+      );
+    } else {
+      console.log("Lightmode");
     }
   } catch (error) {
     console.log(error);

@@ -1,14 +1,13 @@
 import { API_BASE } from "./constant.js";
 import { get } from "./api.js";
-import { render } from "./render.js";
-import { renderMyProfile } from "./myProfile.js";
 import { onload } from "../main.js";
 import { renderloggedInPage } from "./loggedIn.js";
+
 export var userData = null;
 export async function updateData() {
   userData = await get("/users/me?populate=deep,3");
-  console.log("updated data");
 }
+
 let devmode = true;
 
 export async function login() {
